@@ -15,24 +15,29 @@
 # specific language governing permissions and limitations
 # under the License.
 """Common utility functions with strings."""
-from __future__ import annotations
 
+from __future__ import annotations
 import random
 import string
+from typing import Optional
 
+def get_random_string(length: int = 8, choices: str = string.ascii_letters + string.digits) -> str:
+    """
+    Generate a random string of specified length from the given choices.
 
-def get_random_string(length=8, choices=string.ascii_letters + string.digits):
-    """Generate random string."""
+    :param length: Length of the random string to generate. Default is 8.
+    :param choices: String of characters to choose from. Default is alphanumeric characters.
+    :return: Randomly generated string.
+    """
     return "".join(random.choices(choices, k=length))
-
 
 TRUE_LIKE_VALUES = {"on", "t", "true", "y", "yes", "1"}
 
+def to_boolean(astring: Optional[str]) -> bool:
+    """
+    Convert a string to a boolean.
 
-def to_boolean(astring: str | None) -> bool:
-    """Convert a string to a boolean."""
-    if astring is None:
-        return False
-    if astring.lower() in TRUE_LIKE_VALUES:
-        return True
-    return False
+    :param astring: The string to convert.
+    :return: True if the string is in TRUE_LIKE_VALUES, otherwise False.
+    """
+    return astring is not None and astring.lower() in TRUE_LIKE_VALUES
