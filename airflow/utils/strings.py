@@ -14,7 +14,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-"""Common utility functions with strings."""
+"""Common utility functions for string manipulation."""
 
 from __future__ import annotations
 import random
@@ -31,13 +31,17 @@ def get_random_string(length: int = 8, choices: str = string.ascii_letters + str
     """
     return "".join(random.choices(choices, k=length))
 
+# Define a set of string values that are considered to represent a boolean True
 TRUE_LIKE_VALUES = {"on", "t", "true", "y", "yes", "1"}
 
 def to_boolean(astring: Optional[str]) -> bool:
     """
     Convert a string to a boolean.
 
-    :param astring: The string to convert.
+    The function checks if the input string (case-insensitive) is in the set of values that represent True.
+    Any other value, including None, is considered False.
+
+    :param astring: The string to convert. Can be None.
     :return: True if the string is in TRUE_LIKE_VALUES, otherwise False.
     """
     return astring is not None and astring.lower() in TRUE_LIKE_VALUES
